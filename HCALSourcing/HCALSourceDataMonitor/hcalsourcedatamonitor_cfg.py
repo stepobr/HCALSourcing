@@ -15,7 +15,7 @@ process.es_ascii = cms.ESSource('HcalTextCalibrations',
     input = cms.VPSet(
         cms.PSet(
             object = cms.string('ElectronicsMap'),
-            file = cms.FileInPath('version_G_HF_uTCA_only_emap.txt')
+            file = cms.FileInPath('HCALSourcing/HCALSourceDataMonitor/version_G_HF_uTCA_only_emap.txt')
             #file = cms.FileInPath('split_PMT_Box_UXC_emap.txt')
             ),
 	)
