@@ -4,9 +4,9 @@ process = cms.PSet()
 
 
 process.HCALSourceDataMonPlots = cms.PSet(
-    RootInputFileName = cms.string('264742_fed61.root'),
-    RootOutputFileName = cms.string('264742_fed61_plots.root'),
-    NewRowEvery = cms.int32(4),
+    RootInputFileName = cms.string('264742.root'),
+    RootOutputFileName = cms.string('264742_plots.root'),
+    NewRowEvery = cms.int32(2),
     ThumbnailSize = cms.int32(350),
     OutputRawHistograms = cms.bool(False),
     SelectDigiBasedOnTubeName = cms.bool(True),

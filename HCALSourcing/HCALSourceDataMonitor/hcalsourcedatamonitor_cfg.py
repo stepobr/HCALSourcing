@@ -48,7 +48,7 @@ process.histoUnpack = cms.EDProducer("HcalUTCAhistogramUnpacker",
 
 # Tree-maker
 process.hcalSourceDataMon = cms.EDAnalyzer('HCALSourceDataMonitor',
-    RootFileName = cms.untracked.string('264742_fed61.root'),
+    RootFileName = cms.untracked.string('264742.root'),
     PrintRawHistograms = cms.untracked.bool(False),
     SelectDigiBasedOnTubeName = cms.untracked.bool(True),
     HcalSourcePositionDataTag = cms.InputTag("tbunpack"),
