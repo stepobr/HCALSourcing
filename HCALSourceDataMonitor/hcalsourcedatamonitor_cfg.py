@@ -15,7 +15,7 @@ process.es_ascii = cms.ESSource('HcalTextCalibrations',
     input = cms.VPSet(
         cms.PSet(
             object = cms.string('ElectronicsMap'),
-            file = cms.FileInPath('HCALSourcing/HCALSourceDataMonitor/version_G_HF_uTCA_only_emap.txt')
+            file = cms.FileInPath('HCALSourcing/HCALSourceDataMonitor/version_G_emap_HBHEuHTR.txt')
             #file = cms.FileInPath('split_PMT_Box_UXC_emap.txt')
             ),
 	)
@@ -28,7 +28,8 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 # input files
 process.source = cms.Source("HcalTBSource",
     fileNames = cms.untracked.vstring(
- 	'file:/afs/cern.ch/user/s/stepobr/eos/cms/store/group/dpg_hcal/comm_hcal/LS1/USC_264742.root'
+ 	#'file:///data/sourcing/USC1702/USC_287084.root'
+  	'file:///data/sourcing/USC1702/USC_287083newmode.root'
     )
 )
 
@@ -43,12 +44,13 @@ process.tbunpack = cms.EDProducer("HcalTBObjectUnpacker",
 process.histoUnpack = cms.EDProducer("HcalUTCAhistogramUnpacker",
           fedRawDataCollectionTag = cms.InputTag("source"),
           rawDump = cms.bool(False),
-	  fedNumber = cms.int32(61))
+	  fedNumber = cms.int32(64))
 #	  fedNumber = cms.int32(63))
 
 # Tree-maker
 process.hcalSourceDataMon = cms.EDAnalyzer('HCALSourceDataMonitor',
-    RootFileName = cms.untracked.string('264742.root'),
+    RootFileName = cms.untracked.string('ntuple_da_287083.root'),
+    #RootFileName = cms.untracked.string('ntuple_da_287084.root'),
     PrintRawHistograms = cms.untracked.bool(False),
     SelectDigiBasedOnTubeName = cms.untracked.bool(True),
     HcalSourcePositionDataTag = cms.InputTag("tbunpack"),

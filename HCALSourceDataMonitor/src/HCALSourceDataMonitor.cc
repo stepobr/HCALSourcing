@@ -111,10 +111,16 @@ class HCALSourceDataMonitor : public edm::EDAnalyzer {
       int detidepth_[MAXCHPEREVENT];
       float treeChHistMean_[MAXCHPEREVENT];
       float treeChHistRMS_[MAXCHPEREVENT];
-      uint16_t treeChHistBinContentCap0_[MAXCHPEREVENT][65];
-      uint16_t treeChHistBinContentCap1_[MAXCHPEREVENT][65];
-      uint16_t treeChHistBinContentCap2_[MAXCHPEREVENT][65];
-      uint16_t treeChHistBinContentCap3_[MAXCHPEREVENT][65];
+      
+//       uint16_t treeChHistBinContentCap0_[MAXCHPEREVENT][65];
+//       uint16_t treeChHistBinContentCap1_[MAXCHPEREVENT][65];
+//       uint16_t treeChHistBinContentCap2_[MAXCHPEREVENT][65];
+//       uint16_t treeChHistBinContentCap3_[MAXCHPEREVENT][65];
+      
+      uint32_t treeChHistBinContentCap0_[MAXCHPEREVENT][65];
+      uint32_t treeChHistBinContentCap1_[MAXCHPEREVENT][65];
+      uint32_t treeChHistBinContentCap2_[MAXCHPEREVENT][65];
+      uint32_t treeChHistBinContentCap3_[MAXCHPEREVENT][65];
 
   edm::EDGetTokenT<HcalTBTriggerData> tok_tb_;
   edm::EDGetTokenT<HcalSourcePositionData> tok_pd_;
@@ -180,10 +186,10 @@ HCALSourceDataMonitor::HCALSourceDataMonitor(const edm::ParameterSet& iConfig) :
   eventTree_->Branch("detidepth",detidepth_,"detidepth[nChInEvent]/i");
   eventTree_->Branch("chHistMean",treeChHistMean_,"chHistMean[nChInEvent]/F");
   eventTree_->Branch("chHistRMS",treeChHistRMS_,"chHistRMS[nChInEvent]/F");
-  eventTree_->Branch("chHistBinContentCap0",treeChHistBinContentCap0_,"chHistBinContentCap0[nChInEvent][65]/s");
-  eventTree_->Branch("chHistBinContentCap1",treeChHistBinContentCap1_,"chHistBinContentCap1[nChInEvent][65]/s");
-  eventTree_->Branch("chHistBinContentCap2",treeChHistBinContentCap2_,"chHistBinContentCap2[nChInEvent][65]/s");
-  eventTree_->Branch("chHistBinContentCap3",treeChHistBinContentCap3_,"chHistBinContentCap3[nChInEvent][65]/s");
+  eventTree_->Branch("chHistBinContentCap0",treeChHistBinContentCap0_,"chHistBinContentCap0[nChInEvent][65]/i");
+  eventTree_->Branch("chHistBinContentCap1",treeChHistBinContentCap1_,"chHistBinContentCap1[nChInEvent][65]/i");
+  eventTree_->Branch("chHistBinContentCap2",treeChHistBinContentCap2_,"chHistBinContentCap2[nChInEvent][65]/i");
+  eventTree_->Branch("chHistBinContentCap3",treeChHistBinContentCap3_,"chHistBinContentCap3[nChInEvent][65]/i");
 
 }
 
@@ -434,6 +440,11 @@ HCALSourceDataMonitor::analyze(const edm::Event& iEvent, const edm::EventSetup& 
         nEntries+=treeChHistBinContentCap2_[nChInEvent][ib];
         nEntries+=treeChHistBinContentCap3_[nChInEvent][ib];
       }
+
+//       cout << "0: " << nEntriesPerCap[0] << "\t" << "1: " << nEntriesPerCap[1] << "\t" << "2: " << nEntriesPerCap[2] << "\t" << "3: " << nEntriesPerCap[3] << endl;
+//       cout << "No of Entries (all capIds) " << nEntries << endl;
+    
+      
       treeChHistMean_[nChInEvent] = nEntries > 0 ? binValSum/(float)nEntries : 0;
       treeChHistRMS_[nChInEvent] = nEntries > 0 ? sqrt(binValSqrSum/(float)nEntries - treeChHistMean_[nChInEvent]*treeChHistMean_[nChInEvent]) : 0;
       rootFile_->cd();
