@@ -181,9 +181,9 @@ HCALSourceDataMonitor::HCALSourceDataMonitor(const edm::ParameterSet& iConfig) :
   eventTree_->Branch("driverStatus",&treeDriverStatus_);
   eventTree_->Branch("nChInEvent",&treeNChInEvent_);
   //eventTree_->Branch("chDenseIndex",treeChDenseIndex_,"chDenseIndex[nChInEvent]/i");
-  eventTree_->Branch("detieta",detieta_,"detieta[nChInEvent]/i");
-  eventTree_->Branch("detiphi",detiphi_,"detiphi[nChInEvent]/i");
-  eventTree_->Branch("detidepth",detidepth_,"detidepth[nChInEvent]/i");
+  eventTree_->Branch("detieta",detieta_,"detieta[nChInEvent]/I");
+  eventTree_->Branch("detiphi",detiphi_,"detiphi[nChInEvent]/I");
+  eventTree_->Branch("detidepth",detidepth_,"detidepth[nChInEvent]/I");
   eventTree_->Branch("chHistMean",treeChHistMean_,"chHistMean[nChInEvent]/F");
   eventTree_->Branch("chHistRMS",treeChHistRMS_,"chHistRMS[nChInEvent]/F");
   eventTree_->Branch("chHistBinContentCap0",treeChHistBinContentCap0_,"chHistBinContentCap0[nChInEvent][65]/i");
