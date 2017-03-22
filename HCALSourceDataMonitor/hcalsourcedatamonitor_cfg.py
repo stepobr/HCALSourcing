@@ -40,7 +40,7 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 process.source = cms.Source("HcalTBSource",
     fileNames = cms.untracked.vstring(
  	#'file:///data/sourcing/USC1702/USC_288697.root'
-        'root://eoscms//eos/cms/store/group/dpg_hcal/comm_hcal/USC/run289112/USC_289112.root'
+        'root://eoscms//eos/cms/store/group/dpg_hcal/comm_hcal/USC/run289134/USC_289134.root'
         #'file:///data/sourcing/USC1702/USC_288690.root'
     )
 )
@@ -56,12 +56,12 @@ process.tbunpack = cms.EDProducer("HcalTBObjectUnpacker",
 process.histoUnpack = cms.EDProducer("HcalUTCAhistogramUnpacker",
           fedRawDataCollectionTag = cms.InputTag("source"),
           rawDump = cms.bool(False),
-          fedNumber = cms.int32(60))
+          fedNumbers = cms.vint32(64,61,60))
 
 # Tree-maker
 process.hcalSourceDataMon = cms.EDAnalyzer('HCALSourceDataMonitor',
     #RootFileName = cms.untracked.string('/data/sourcing/Ntuples1702/ntuple_da_288924.root'),
-    RootFileName = cms.untracked.string('/data/sourcing/Ntuples1702/ntuple_da_289112.root'),
+    RootFileName = cms.untracked.string('/data/sourcing/Ntuples1702/ntuple_da_289134.root'),
     #PrintRawHistograms = cms.untracked.bool(False),
     #SelectDigiBasedOnTubeName = cms.untracked.bool(True),
     SelectDigiBasedOnTubeName = cms.untracked.bool(True),
