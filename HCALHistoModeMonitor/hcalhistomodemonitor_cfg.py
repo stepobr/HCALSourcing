@@ -9,13 +9,18 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 process.load('FWCore.Modules.printContent_cfi')
 
 process.load("Configuration.Geometry.GeometryIdeal_cff")
+
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = 'MCRUN2_74_V8A'
+from Configuration.AlCa.GlobalTag import GlobalTag
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase2_realistic', '')
+
 process.es_ascii = cms.ESSource('HcalTextCalibrations',
     input = cms.VPSet(
         cms.PSet(
             object = cms.string('ElectronicsMap'),
-            file = cms.FileInPath('HCALSourcing/HCALHistoModeMonitor/version_G_emap_HBHEuHTR.txt')
+            #file = cms.FileInPath('HCALSourcing/HCALSourceDataMonitor/version_G_emap_HBHEuHTR.txt'),
+            file = cms.FileInPath('HCALSourcing/HCALSourceDataMonitor/ngHF2017EMap_20170206_pre05.txt')
+            #file = cms.FileInPath('HCALSourcing/HCALSourceDataMonitor/emap_versionG_ngHF20170206_HEP17_CRF.txt')            
             ),
 	)
     )
@@ -28,8 +33,8 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 # input files
 process.source = cms.Source("HcalTBSource",
     fileNames = cms.untracked.vstring(
- 	#'file:///data/sourcing/USC1702/USC_287084.root'
-  	'file:///data/sourcing/USC1702/USC_287083newmode.root'
+        'root://eoscms//eos/cms/store/group/dpg_hcal/comm_hcal/USC/run289227/USC_289227.root'
+        #'file:///data/sourcing/USC1702/USC_289928.root'
     )
 )
 
@@ -44,11 +49,12 @@ process.tbunpack = cms.EDProducer("HcalTBObjectUnpacker",
 process.histoUnpack = cms.EDProducer("HcalUTCAhistogramUnpacker",
           fedRawDataCollectionTag = cms.InputTag("source"),
           rawDump = cms.bool(False),
-	  fedNumber = cms.int32(64))
+	  fedNumber = cms.int32(62))
 
 # Tree-maker
 process.hcalHistoModeMonitor = cms.EDAnalyzer('HCALHistoModeMonitor',
-    RootFileName = cms.untracked.string('ntuple_tmp.root'),
+    #RootFileName = cms.untracked.string('/wwwlocal/p5sourcing/grandr/Ana/Tests/scratch/HCALHistoModeMonitor.289928.root'),
+    RootFileName = cms.untracked.string('HCALHistoModeMonitor.289227.root'),
     PrintRawHistograms = cms.untracked.bool(False),
     SelectDigiBasedOnTubeName = cms.untracked.bool(False),
     #HcalSourcePositionDataTag = cms.InputTag("tbunpack"),
