@@ -20,8 +20,7 @@ process.load("Configuration.Geometry.GeometryIdeal_cff")
 
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase2_realistic', '')
-
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2018_realistic', '')
 process.es_ascii = cms.ESSource('HcalTextCalibrations',
     input = cms.VPSet(
         cms.PSet(
