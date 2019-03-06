@@ -99,6 +99,8 @@ class HCALSourceDataMonitor : public edm::EDAnalyzer {
       float treeMotorCurrent_;
       float treeMotorVoltage_;
       int treeReelPos_;
+      int treesourceID_;
+      int treedriverID_;
       float treeTimestamp1_;
       float treeTriggerTimestamp_;
       char treeTubeName_[50];
@@ -174,6 +176,8 @@ HCALSourceDataMonitor::HCALSourceDataMonitor(const edm::ParameterSet& iConfig) :
   eventTree_->Branch("motorCurrent",&treeMotorCurrent_);
   eventTree_->Branch("motorVoltage",&treeMotorVoltage_);
   eventTree_->Branch("reelPos",&treeReelPos_);
+  eventTree_->Branch("sourceID",&treesourceID_);
+  eventTree_->Branch("driverID",&treedriverID_);
   eventTree_->Branch("timestamp1",&treeTimestamp1_);
   eventTree_->Branch("triggerTimestamp",&treeTriggerTimestamp_);
   eventTree_->Branch("tubeName",treeTubeName_,"tubeName/C");
@@ -345,6 +349,8 @@ HCALSourceDataMonitor::analyze(const edm::Event& iEvent, const edm::EventSetup& 
   treeMotorCurrent_ = spd->motorCurrent();
   treeMotorVoltage_ = spd->motorVoltage();
   treeReelPos_ = spd->reelCounter();
+  treesourceID_ = spd->sourceId();
+  treedriverID_ = spd->driverId();
   treeDriverStatus_ = (uint32_t)spd->status();
   treeTriggerTimestamp_ = trigtimebase;
   treeTimestamp1_ = timebase;
